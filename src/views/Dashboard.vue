@@ -11,6 +11,20 @@
         "strengthChallenge": ["Planks w/ Shoulder Taps (3 Min.)"],
         "videoURLS": ["/8F-SW8XTbE8", "/ASdvN_XEl_c", "/MCVX9wRd_h0"]
     }
+    let goals = [
+        {
+            "name": "Global Running Day 5K", 
+            "date": "06/01/22"
+        },
+        {
+            "name": "Helenback Half Marathon", 
+            "date": "04/23/22"
+        },
+        {
+            "name": "Hotter N' Hell Trail Race 18 Miles", 
+            "date": "07/24/22 "
+        },
+    ]
 </script>
 
 <template>
@@ -25,7 +39,7 @@
                <WorkoutComponent :workout="workoutEL"/>
             </div>
             <div class="goals-container">
-                <GoalsComponent />
+                <GoalsComponent :goals="goals"/>
             </div>
             <div class="goals-container">
 
@@ -86,5 +100,7 @@
         background-color: #343434;
         border-radius: 50px;
         text-align:center;
+        overflow-y: scroll;
+        scrollbar-width: none;
     }
 </style>
