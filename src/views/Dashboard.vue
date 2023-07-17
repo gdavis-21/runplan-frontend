@@ -1,8 +1,15 @@
 <script setup>
     import WorkoutComponent from '../components/WorkoutComponent.vue';
+    import GoalsComponent from '../components/GoalsComponent.vue';
 
     let workoutEL = {
-        "date": "Thursday's Workout"
+        "date": "Thursday's Workout",
+        "distance": "5 Miles",
+        "pace": "Easy (4/10)",
+        "strengthCircuit": ["Planks w/ Shoulder Taps (1 min.)", "Debug Bug w/ Arm/Leg Extension (1 min.)", "Leg Flutters (1 min.)"],
+        "mobilityChallenge": ["World's Greatest Stretch (2 Min.)"],
+        "strengthChallenge": ["Planks w/ Shoulder Taps (3 Min.)"],
+        "videoURLS": ["/8F-SW8XTbE8", "/ASdvN_XEl_c", "/MCVX9wRd_h0"]
     }
 </script>
 
@@ -18,6 +25,7 @@
                <WorkoutComponent :workout="workoutEL"/>
             </div>
             <div class="goals-container">
+                <GoalsComponent />
             </div>
             <div class="goals-container">
 
@@ -33,7 +41,8 @@
 </template>
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Sen:wght@700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,600;0,900;1,500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,300&display=swap');
     
     .background {
         position: relative;
@@ -41,8 +50,9 @@
         top: 2%;
         border-radius: 50px;
         background-color: #5A9E96;
-        width: 96%;
-        height:95%;
+        width: 94%;
+        height:90%;
+        min-height: 750px;
     }
     .nav-bar-container {
         display: flex;
