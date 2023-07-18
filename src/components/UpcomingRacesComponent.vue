@@ -1,6 +1,11 @@
 <script setup>
-
 const props = defineProps({races: Object})
+function sortRaceObjecs(a, b) {
+    const aDate = new Date(a.date)
+    const bDate = new Date(b.date)
+    return aDate - bDate
+}
+props.races.sort(sortRaceObjecs)
 </script>
 
 <template>

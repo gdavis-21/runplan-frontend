@@ -45,7 +45,9 @@
         <div class="nav-bar-container">
             <img class="logo" src="/src/assets/Fleet-Feet-Logo.png">
             <p class="title">Summer Warriors - Week 5</p>
-            <p>Run Plan Logo</p>
+            <span class="material-symbols-outlined menu-icon">
+                menu
+            </span>
         </div>
         <div class="grid-container">
             <div class="flex-workout-container">
@@ -91,7 +93,8 @@
         background-color: #5A9E96;
         width: 90%;
         height:95%;
-        min-height: 700px;
+        min-height: 750px;
+        min-width: 1100px;
     }
     .nav-bar-container {
         display: flex;
@@ -137,7 +140,13 @@
         position:relative;
         top:20px;
         left:-50px;
-        width:10%;
-        height:10%;
+        width:129px;
+        height:57px;
+    }
+    .menu-icon {
+        position:relative;
+        top: 20px;
+        left:50px;
+        font-size:2.5rem;
     }
 </style>
