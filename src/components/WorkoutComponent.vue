@@ -18,21 +18,24 @@ function onClickRightVideo() {
 </script>
 
 <template>
-    <div class="workout-container">
-        <p class="date">{{ workout["date"] }}</p>
-        <p class="category-name">Run: <span class="category-value">{{ workout["distance"] }}</span></p>
-        <p class="category-name">Pace: <span class="category-value">{{ workout["pace"] }}</span></p>
-        <p class="category-name">20 min. AMRAP Strength Circuit:</p>
-        <p class="category-value" v-for="circuitItem in workout['strengthCircuit']" :key="circuitItem">+ {{ circuitItem }}</p>
-        <p class="category-name"> Mobility Challenge:</p>
-        <p class="category-value" v-for="challenge in workout['mobilityChallenge']" :key="challenge">+ {{  challenge }}</p>
-        <p class="category-name">Strength Challenge:</p>
-        <p class="category-value" v-for="challenge in workout['strengthChallenge']" :key="challenge">+ {{  challenge }}</p>
+    <div class="container">
+        <p class="title">{{ workout["date"] }}</p>
+        <p class="subtitle">🏃‍♂️ Run:</p>
+        <p class="value margin-bottom">{{ workout["distance"] }} at a {{ workout["pace"] }} pace.</p>
+        <p class="subtitle">🏋️‍♀️ 20 min. AMRAP Strength Circuit:</p>
+        <div class="margin-bottom">
+            <p class="value" v-for="circuitItem in workout['strengthCircuit']" :key="circuitItem">+ {{ circuitItem }}</p>
+        </div>
+        <p class="subtitle">🧘‍♀️ Mobility Challenge:</p>
+        <div class="margin-bottom">
+            <p class="value" v-for="challenge in workout['mobilityChallenge']" :key="challenge">+ {{  challenge }}</p>
+        </div>
+        <p class="subtitle">Strength Circuit Exercises:</p>
         <div style="display:flex; flex-direction: row; align-items: center;">
             <span @click="onClickLeftVideo" class="material-symbols-outlined chevron-button">
                 arrow_back_ios
             </span>
-            <iframe style="width:80%" :src="[`https://www.youtube.com/embed/${videoURL}`]" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <iframe style="width:80%; height:80%" :src="[`https://www.youtube.com/embed/${videoURL}`]" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             <span @click="onClickRightVideo" class="material-symbols-outlined chevron-button">
                 arrow_forward_ios
             </span>
@@ -40,22 +43,33 @@ function onClickRightVideo() {
     </div>
 </template>
 
-<style>
-    .date {
-        font-family: "Montserrat";
-        font-size: 1.1rem;
-        color: #FFFFFF;
-        font-weight:900;
+<style scoped>
+
+    .container {
+        line-height: 100%;
+        padding-left:2.5%;
+        padding-right:2.5%;
     }
-    .category-name {
+
+    .margin-bottom {
+        margin-bottom: 10%;
+    }
+
+    .title {
+        font-family: "Montserrat";
+        font-size: 1.5rem;
+        font-weight:900;
+        color: #FFFFFF;
+    }
+    .subtitle {
         font-family: "Montserrat";
         font-size: 1rem;
         color: #FFFFFF;
-        font-weight:600;
+        font-weight:800;
     }
-    .category-value {
+    .value {
         font-family: "Montserrat";
-        font-size: 0.7rem;
+        font-size: 0.8rem;
         color: #FFFFFF;
         font-weight:300;
         font-style: italic;

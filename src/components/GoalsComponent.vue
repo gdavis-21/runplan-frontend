@@ -2,64 +2,59 @@
 import { ref } from "vue"
 const props = defineProps({goals: Object})
 const goals = ref([...props.goals])
+const goalEmojis = ["🎯", "🏁", "💯", "🏆", "💪", "✨", "🌟", "🔥"]
 const newGoal = ref("")
 
 function addGoal() {
 
-    goals.value.push({"name": "", "date": ""})
+    goals.value.push({"name": "Example Goal"})
 }
 
 </script>
 
 <template>
-    <div class="flex-title-container">
-        <p class="title">My Goals:</p>
-        <span class="material-symbols-outlined plus-button" @click="addGoal">
-            add
-        </span> 
+    <div class="container">
+        <p class="title" style="margin:none; padding:none">My Goals
+            <span class="material-symbols-outlined plus-button" @click="addGoal">
+                add
+            </span> 
+        </p>
+        <p class="subtitle" v-for="(goal, index) in goals" :key="goal.name">
+            {{ goalEmojis[index] }} Goal #{{ index + 1 }}: <p class="value" style="line-height:200%;" contenteditable="true">{{ goal.name }}</p>
+        </p>
     </div>
-    <p contenteditable="true" class="goals" v-for="goal in goals" :key="goal.name">
-            <span class="date">{{ goal.date }}</span> - <span class="name">{{ goal.name }}</span>
-    </p>
 </template>
 
-<style>
-    .flex-title-container {
-        display:flex;
-        flex-direction: row;
-        width:100%;
-        justify-content: center;
-        font-family: "Montserrat";
-        font-weight: 900;
-        font-size: 1.1rem;
-        color: #FFFF
+<style scoped>
+    .container {
+        line-height: 100%;
+        padding-left:2.5%;
+        padding-right:2.5%;
     }
     .title {
-       text-align: center;
-       margin-left: 25%;
+        font-family: "Montserrat";
+        font-size: 1.5rem;
+        font-weight:900;
+        color: #FFFFFF;
+        margin-top: 5%;
+        margin-left: 25%;
+    }
+    .subtitle {
+        font-family: "Montserrat";
+        font-size: 1rem;
+        color: #FFFFFF;
+        font-weight:800;
+    }
+    .value {
+        font-size:0.8rem;
+        font-weight:300;
+        font-style: italic;
     }
     .plus-button {
         justify-content: end;
         margin-top:auto;
         margin-bottom: auto;
         margin-left: 20%;
-    }
-    .goals {
-        font-family: "Montserrat";
-        font-weight: 300;
-        font-style: italic;
-        font-size: 0.8rem;
-        color:white;
-        line-height: 150%;
-        margin-top: 0;
-    }
-    .date {
-        font-family: "Montserrat";
-        font-weight: 600;
-        font-size: 0.8rem;
-        color:white;
-    }
-    .plus-button {
         cursor:pointer
     }
 </style>
