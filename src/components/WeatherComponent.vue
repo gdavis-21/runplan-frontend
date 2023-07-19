@@ -8,10 +8,18 @@ const date = new Date();
 <template>
     <div class="container">
         <p class="text title">Weather Report</p>
-        <p class="text subtitle margin-bottom"> Current Temperature: <span class="text value">{{ data.hourly.temperature_2m[date.getHours()] }} F°</span></p> 
-        <p class="text subtitle margin-bottom">Chance of 🌧 in the Next Hour: <span class="text value">{{ data.hourly.precipitation_probability[date.getHours()] }}%</span></p>
-        <p class="text subtitle margin-bottom"> ⬆️ Today's High: <span class="text value">{{ data.daily.temperature_2m_max[0] }} F°</span></p>
-        <p class="text subtitle margin-bottom">⬇️ Today's Low: <span class="text value">{{ data.daily.temperature_2m_min[0] }} F°</span></p>
+        <p class="text subtitle"> Current Temperature: <p class="text value">{{ data.hourly.temperature_2m[date.getHours()] }} F°</p></p> 
+        <div style="display:flex; direction:row; justify-content: space-around;">
+            <div style="display:flex; flex-direction: column;;">
+                <p class=text style="margin-bottom:0">⬇️ Today's Low:</p>
+                <p class="text value">{{ data.daily.temperature_2m_min[0] }} °F</p>
+            </div>
+            <div style="display:flex; flex-direction: column;">
+                <p class="text" style="margin-bottom:0">⬆️ Today's High:</p>
+                <p class="text value">{{ data.daily.temperature_2m_max[0] }} °F</p>
+            </div>
+        </div>
+        <p class="text subtitle">Chance of 🌧 in the Next Hour: <p class="text value">{{ data.hourly.precipitation_probability[date.getHours()] }}%</p></p>
     </div>
 </template>
 

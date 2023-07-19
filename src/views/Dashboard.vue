@@ -4,13 +4,17 @@
     import UpcomingRacesComponent from '../components/UpcomingRacesComponent.vue';
     import WeatherComponent from '../components/WeatherComponent.vue';
 
+    const upcomingRacesResponse = await fetch("http://127.0.0.1:8000/fetchUpcomingRaces")
+    const upcomingRacesData = await upcomingRacesResponse.json()
+
+
+
     let workoutEL = {
-        "date": "Thursday's Workout",
+        "date": "Today's Workout",
         "distance": "5 Miles",
         "pace": "easy (4/10)",
         "strengthCircuit": ["Planks w/ Shoulder Taps (1 min.)", "Debug Bug w/ Arm/Leg Extension (1 min.)", "Leg Flutters (1 min.)", "Side Plank (1 min.)"],
         "mobilityChallenge": ["World's Greatest Stretch (2 Min.)"],
-        "strengthChallenge": ["None"],
         "videoURLS": ["/ASdvN_XEl_c", "/8F-SW8XTbE8", "/MCVX9wRd_h0"]
     }
     let goals = [
@@ -22,20 +26,6 @@
         },
         {
             "name": "Run the Hotter N' Hell Trail Race 18 Miles.", 
-        },
-    ]
-    let races = [
-        {
-            "name": "Mount Cheaha 50K", 
-            "date": "06/01/22"
-        },
-        {
-            "name": "Blood Rock 1000K", 
-            "date": "04/23/22"
-        },
-        {
-            "name": "Hillbilly Rodeo Race 200M", 
-            "date": "07/24/22"
         },
     ]
 </script>
@@ -70,7 +60,7 @@
                 </Suspense>
             </div>
             <div class="container">
-                <UpcomingRacesComponent :races="races"/>
+                <UpcomingRacesComponent :races="upcomingRacesData"/>
             </div>
             <div class="container">
 
