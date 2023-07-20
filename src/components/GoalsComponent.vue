@@ -13,7 +13,7 @@ function addGoal() {
 </script>
 
 <template>
-    <div class="container">
+    <div class="inner-container">
         <p class="title" style="margin:none; padding:none">My Goals
             <span class="material-symbols-outlined plus-button" @click="addGoal">
                 add
@@ -25,15 +25,18 @@ function addGoal() {
     </div>
 </template>
 
-<style scoped>
-    .container {
+<style>
+    .inner-container {
         line-height: 100%;
         padding-left:2.5%;
         padding-right:2.5%;
     }
+</style>
+
+<style scoped>
     .title {
         font-family: "Montserrat";
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         font-weight:900;
         color: #FFFFFF;
         margin-top: 5%;
@@ -41,12 +44,12 @@ function addGoal() {
     }
     .subtitle {
         font-family: "Montserrat";
-        font-size: 1rem;
+        font-size: 0.8rem;
         color: #FFFFFF;
         font-weight:800;
     }
     .value {
-        font-size:0.8rem;
+        font-size:0.7rem;
         font-weight:300;
         font-style: italic;
     }

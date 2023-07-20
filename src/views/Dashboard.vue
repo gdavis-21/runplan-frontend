@@ -3,35 +3,43 @@
     import GoalsComponent from '../components/GoalsComponent.vue';
     import UpcomingRacesComponent from '../components/UpcomingRacesComponent.vue';
     import WeatherComponent from '../components/WeatherComponent.vue';
+    import { ref, onMounted, onUnmounted } from 'vue';
 
     const upcomingRacesResponse = await fetch("http://127.0.0.1:8000/fetchUpcomingRaces")
-    const upcomingRacesData = await upcomingRacesResponse.json()
+    const upcomingRaces = await upcomingRacesResponse.json()
 
+    const userDataResponse = await fetch("http://127.0.0.1:8000/fetchUserData")
+    const userData = await userDataResponse.json()
 
+    const isSmallScreen = ref("")
+    let mql
 
-    let workoutEL = {
-        "date": "Today's Workout",
-        "distance": "5 Miles",
-        "pace": "easy (4/10)",
-        "strengthCircuit": ["Planks w/ Shoulder Taps (1 min.)", "Debug Bug w/ Arm/Leg Extension (1 min.)", "Leg Flutters (1 min.)", "Side Plank (1 min.)"],
-        "mobilityChallenge": ["World's Greatest Stretch (2 Min.)"],
-        "videoURLS": ["/ASdvN_XEl_c", "/8F-SW8XTbE8", "/MCVX9wRd_h0"]
+    function handleMqlChange(e) {
+        isSmallScreen.value = e.matches
     }
-    let goals = [
-        {
-            "name": "Run the Global Running Day 5K in 18 Minutes.", 
-        },
-        {
-            "name": "Run the Helenback Half Marathon in less than 2 HRs.", 
-        },
-        {
-            "name": "Run the Hotter N' Hell Trail Race 18 Miles.", 
-        },
-    ]
+
+    onMounted(() => {
+            mql = window.matchMedia('(max-width: 1256px)')
+            isSmallScreen.value = mql.matches
+            mql.addEventListener("change", handleMqlChange)
+        }
+    )
+
+    onUnmounted(() => {
+        mql.removeEventListener("change", handleMqlChange)
+    })
+
+
 </script>
 
 <template>
     <div class="background">
+        <div v-if="{isSmallScreen}" style="display:flex; flex-direction: row; justify-content: space-between; align-items: center; margin-left:5%; margin-right: 5%">
+            <img style="width:40%;" src="/src/assets/Fleet-Feet-Logo.png">
+            <span style="color:black; font-size:3rem;" class="material-symbols-outlined">
+                menu
+            </span>
+        </div>
         <div class="nav-bar-container">
             <img class="logo" src="/src/assets/Fleet-Feet-Logo.png">
             <p class="title">Summer Warriors - Week 5</p>
@@ -41,29 +49,37 @@
         </div>
         <div class="grid-container">
             <div class="flex-workout-container">
-                <span class="material-symbols-outlined left-right-arrows">
+                <span class="material-symbols-outlined previous-workout-button">
                     arrow_back_ios
                 </span>
                 <div class="container">
-                    <WorkoutComponent :workout="workoutEL"/>
+                    <WorkoutComponent :workout="userData.workouts[0]"/>
                 </div>
-                <span class="material-symbols-outlined left-right-arrows">
+                <span class="material-symbols-outlined next-workout-button">
                     arrow_forward_ios
                 </span>
             </div>
-            <div class="container">
-                <GoalsComponent :goals="goals"/>
+            <div :class="{'flex-workout-container': isSmallScreen}">
+                <div class="container workout">
+                    <GoalsComponent :goals="userData.goals"/>
+                </div>
             </div>
-            <div class="container">
-                <Suspense>
-                    <WeatherComponent />
-                </Suspense>
+            <div :class="{'flex-workout-container': isSmallScreen}">
+                <div class="container workout">
+                    <UpcomingRacesComponent :races="upcomingRaces"/>
+                </div>
             </div>
-            <div class="container">
-                <UpcomingRacesComponent :races="upcomingRacesData"/>
+            <div :class="{'flex-workout-container': isSmallScreen}">
+                <div class="container workout">
+                    <Suspense>
+                        <WeatherComponent />
+                    </Suspense>
+                </div>
             </div>
-            <div class="container">
+            <div v-if="!isSmallScreen">
+                <div class="container">
 
+                </div>
             </div>
         </div>
     </div>
@@ -74,7 +90,7 @@
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,300&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
-    
+
     .background {
         position: relative;
         margin: auto;
@@ -84,7 +100,6 @@
         width: 90%;
         height:95%;
         min-height: 750px;
-        min-width: 1100px;
     }
     .nav-bar-container {
         display: flex;
@@ -120,9 +135,6 @@
         overflow-wrap: break-word;
         height:100%;
     }
-    .left-right-arrows {
-        color:#FFFF;
-    }
     .title {
         font-size: 1.5rem;
     }
@@ -138,5 +150,86 @@
         top: 20px;
         left:50px;
         font-size:2.5rem;
+    }
+    .previous-workout-button {
+        color:#FFFF;
+        cursor: pointer;
+    }
+    .next-workout-button {
+        color:#FFFF;
+        cursor: pointer;
+    }
+    @media screen and (max-width: 1256px) {
+
+        .background {
+            position: relative;
+            margin: auto;
+            top: 0%;
+            border-radius: 50px;
+            background-color: #ffffff;
+            width: 100%;
+            height:2750px;
+        }
+        .grid-container {
+            display:flex;
+            flex-direction: column;
+        }
+        .flex-workout-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .container {
+            border-radius:50px;
+            text-align: center;
+            background-color: #343434;
+            overflow: auto;
+            overflow-wrap: break-word;
+            height:100%;
+            width:100%;
+            padding-bottom: 5%
+        }
+        .workout {
+            width:90%;
+        }
+        .inner-container {
+            padding: 0;
+            margin-left:2.5%;
+            margin-right:2.5%;
+        }
+        .nav-bar-container {
+            display: flex;
+            width:100%;
+            flex-direction: row;
+            justify-content: space-around;
+            font-family: "Montserrat";
+            font-weight: 900;
+            color: #FFFF;
+            font-size: 1.25rem;
+            text-align: center;
+        }
+        
+        .title {
+            font-size: 6vw;
+            margin-bottom: 0;
+            color: #343434
+        }
+        .logo {
+            display:none;
+        }
+        .menu-icon {
+            display:none;
+            position:absolute;
+            top: 20px;
+            left:50px;
+            font-size:2.5rem;
+        }
+        .previous-workout-button {
+            color: #343434;
+        }
+        .next-workout-button {
+            color: #343434;
+        }
     }
 </style>

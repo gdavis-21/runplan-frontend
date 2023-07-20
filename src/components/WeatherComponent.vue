@@ -6,43 +6,47 @@ const date = new Date();
 </script>
 
 <template>
-    <div class="container">
+    <div class="inner-container">
         <p class="text title">Weather Report</p>
         <p class="text subtitle"> Current Temperature: <p class="text value">{{ data.hourly.temperature_2m[date.getHours()] }} F°</p></p> 
+        <p class="text subtitle">Chance of 🌧 in the Next Hour: <p class="text value">{{ data.hourly.precipitation_probability[date.getHours()] }}%</p></p>
         <div style="display:flex; direction:row; justify-content: space-around;">
             <div style="display:flex; flex-direction: column;;">
-                <p class=text style="margin-bottom:0">⬇️ Today's Low:</p>
+                <p class="text subtitle" style="margin-bottom:0">⬇️ Today's Low:</p>
                 <p class="text value">{{ data.daily.temperature_2m_min[0] }} °F</p>
             </div>
             <div style="display:flex; flex-direction: column;">
-                <p class="text" style="margin-bottom:0">⬆️ Today's High:</p>
+                <p class="text subtitle" style="margin-bottom:0">⬆️ Today's High:</p>
                 <p class="text value">{{ data.daily.temperature_2m_max[0] }} °F</p>
             </div>
         </div>
-        <p class="text subtitle">Chance of 🌧 in the Next Hour: <p class="text value">{{ data.hourly.precipitation_probability[date.getHours()] }}%</p></p>
     </div>
 </template>
 
-<style scoped>
-    .container {
+
+<style>
+    .inner-container {
         line-height: 100%;
         padding-left:2.5%;
         padding-right:2.5%;
     }
+</style>
+
+<style scoped>
     .text {
         font-family: "Montserrat";
         color:white;
     }
     .title {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         font-weight:900;
     }
     .subtitle {
-        font-size: 1rem;
+        font-size: 0.8rem;
         font-weight:500;
     }
     .value {
-        font-size: 0.8rem;
+        font-size: 0.7rem;
         font-weight:300;
         font-style: italic;
     }
