@@ -49,7 +49,7 @@ function onClickRightVideo() {
 <style scoped>
 
     .margin-bottom {
-        margin-bottom: 25px;
+        margin-bottom: 20px;
     }
 
     .title {

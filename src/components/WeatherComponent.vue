@@ -7,16 +7,16 @@ const date = new Date();
 
 <template>
     <div class="inner-container">
-        <p class="text title">Weather Report</p>
-        <p class="text subtitle"> Current Temperature: <p class="text value">{{ data.hourly.temperature_2m[date.getHours()] }} F°</p></p> 
-        <p class="text subtitle">Chance of 🌧 in the Next Hour: <p class="text value">{{ data.hourly.precipitation_probability[date.getHours()] }}%</p></p>
-        <div style="display:flex; direction:row; justify-content: space-around;">
-            <div style="display:flex; flex-direction: column;;">
-                <p class="text subtitle" style="margin-bottom:0">⬇️ Today's Low:</p>
+        <p class="text title">Weather Forecast</p>
+        <p class="text subtitle"> Current Temperature: <span class="text value">{{ data.hourly.temperature_2m[date.getHours()] }} F°</span></p> 
+        <p class="text subtitle">Chance of 🌧 in the Next Hour: <span class="text value">{{ data.hourly.precipitation_probability[date.getHours()] }}%</span></p>
+        <div style="display:flex; direction:row; justify-content: space-around; margin:0; padding:0">
+            <div style="display:flex; flex-direction: column;">
+                <p class="text subtitle" style="margin-bottom:0; margin-top: 0">⬇️ Today's Low:</p>
                 <p class="text value">{{ data.daily.temperature_2m_min[0] }} °F</p>
             </div>
             <div style="display:flex; flex-direction: column;">
-                <p class="text subtitle" style="margin-bottom:0">⬆️ Today's High:</p>
+                <p class="text subtitle" style="margin-bottom:0; margin-top: 0;">⬆️ Today's High:</p>
                 <p class="text value">{{ data.daily.temperature_2m_max[0] }} °F</p>
             </div>
         </div>
@@ -26,7 +26,7 @@ const date = new Date();
 
 <style>
     .inner-container {
-        line-height: 100%;
+        line-height: 120%;
         padding-left:2.5%;
         padding-right:2.5%;
     }

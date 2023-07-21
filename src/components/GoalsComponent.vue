@@ -39,6 +39,8 @@ function addGoal() {
         font-size: 1.2rem;
         font-weight:900;
         color: #FFFFFF;
+        position:relative;
+        top:-10px;
     }
     .subtitle {
         font-family: "Montserrat";
@@ -53,6 +55,8 @@ function addGoal() {
     }
     .plus-button {
         cursor:pointer;
-        position: absolute;
+        position: relative;
+        top:5px;
+        left:12.5%;
     }
 </style>
