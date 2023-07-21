@@ -11,6 +11,15 @@
     const userDataResponse = await fetch("http://127.0.0.1:8000/fetchUserData")
     const userData = await userDataResponse.json()
 
+    const counterWorkouts = ref(0)
+
+    function onClickPreviousWorkout() {
+        counterWorkouts.value < userData["workouts"].length - 1 ? counterWorkouts.value++ : counterWorkouts.value = 0
+    }
+    function onClickNextWorkout() {
+        counterWorkouts.value == 0 ? counterWorkouts.value = userData["workouts"].length - 1 : counterWorkouts.value--
+    }
+
     const isSmallScreen = ref("")
     let mql
 
@@ -35,15 +44,15 @@
 
 <template>
         <div v-if="isSmallScreen" style="display:flex; flex-direction: row; justify-content: space-between; align-items:center; margin-left:2.5%; margin-right: 5%; position:relative; top:0.5%">
-            <img style="width:30%;" src="/src/assets/Fleet-Feet-Logo.png">
-            <span style="color: #343434; font-size:6vw;" class="material-symbols-outlined">
+            <img style="width:25%;" src="/src/assets/Fleet-Feet-Logo.png">
+            <span style="color: #343434; font-size:6vw; cursor: pointer;" class="material-symbols-outlined">
                 menu
             </span>
         </div>
         <p v-if="isSmallScreen" style="text-align: center; font-size: 1.3rem; padding-left:2.5%; padding-right:2.5%;color: #343434; font-family: 'Montserrat'; font-weight: 900;">Summer Warriors - Week 5</p>
         <div v-if="!isSmallScreen" style="display:flex; flex-direction: row; justify-content: space-between; align-items:center; margin-left:2.5%; margin-right: 5%; position:relative;">
             <img style="width:17%;" src="/src/assets/Fleet-Feet-Logo.png">
-            <span style="font-size:3.5vw;" class="material-symbols-outlined">
+            <span style="font-size:3.5vw; cursor: pointer;" class="material-symbols-outlined">
                 menu
             </span>
         </div>
@@ -51,13 +60,13 @@
     <div class="background">
         <div class="grid-container">
             <div class="flex-workout-container">
-                <span class="material-symbols-outlined previous-workout-button">
+                <span @click="onClickPreviousWorkout" class="material-symbols-outlined previous-workout-button">
                     arrow_back_ios
                 </span>
                 <div class="container" style="height:100%">
-                    <WorkoutComponent :workout="userData.workouts[0]"/>
+                    <WorkoutComponent :workout="userData.workouts[counterWorkouts]"/>
                 </div>
-                <span class="material-symbols-outlined next-workout-button">
+                <span @click="onClickNextWorkout" class="material-symbols-outlined next-workout-button">
                     arrow_forward_ios
                 </span>
             </div>
@@ -68,14 +77,14 @@
             </div>
             <div :class="{'flex-workout-container': isSmallScreen}">
                 <div class="container workout">
-                    <UpcomingRacesComponent :races="upcomingRaces"/>
+                    <Suspense>
+                        <WeatherComponent />
+                    </Suspense>
                 </div>
             </div>
             <div :class="{'flex-workout-container': isSmallScreen}">
                 <div class="container workout">
-                    <Suspense>
-                        <WeatherComponent />
-                    </Suspense>
+                    <UpcomingRacesComponent :races="upcomingRaces"/>
                 </div>
             </div>
             <div v-if="!isSmallScreen">
@@ -85,6 +94,8 @@
             </div>
         </div>
     </div>
+    <div class="menu-container">
+    </div>
 </template>
 
 <style>
@@ -93,12 +104,26 @@
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
 
+    html {
+        width:98%;
+    }
+
+    .menu-container {
+        background-color:red;
+        position:absolute;
+        top:0%;
+        left:100%;
+        height:100%;
+        width:200px;
+    }
+
     .background {
         position: relative;
         margin: auto;
         border-radius: 50px;
         background-color: #ffffff;
         height:70%;
+        width:90%;
     }
     .nav-bar-container {
         display: flex;
@@ -110,13 +135,11 @@
     }
     .grid-container {
         display:grid;
-        grid-template-columns: 1fr 0.8fr 0.8fr;
+        grid-template-columns: 1fr 0.9fr 0.9fr;
         grid-template-rows: 1fr 1fr;
         height: 85%;
         row-gap: 20px;
-        column-gap: 20px;
-        margin-left:5%;
-        margin-right:5%;
+        column-gap: 15px;
     }
     .flex-workout-container {
         grid-row-start: 1;
@@ -127,7 +150,7 @@
         align-items: center;
     }
     .container {
-        border-radius:50px;
+        border-radius:25px;
         text-align: center;
         background-color: #343434;
         overflow: auto;
@@ -177,7 +200,7 @@
             border-radius: 50px;
             background-color: #ffffff;
             width: 100%;
-            height:2750px;
+            height:100%;
             max-width:400px;
         }
         .grid-container {
@@ -191,7 +214,7 @@
             margin-bottom: 20px;
         }
         .container {
-            border-radius:50px;
+            border-radius:25px;
             text-align: center;
             background-color: #343434;
             overflow: auto;

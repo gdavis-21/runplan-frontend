@@ -6,17 +6,18 @@ const props = defineProps({workout: Object})
 const date = new Date()
 const today = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
 
-const counter = ref(0)
+const counterVideos = ref(0)
 const videoURL = computed(() => {
-    return props.workout["videoURLS"].length > 0 ? props.workout["videoURLS"][counter.value] : ""
+    return props.workout["videoURLS"].length > 0 ? props.workout["videoURLS"][counterVideos.value] : ""
 })
 
-function onClickLeftVideo() {
-    counter.value < props.workout["videoURLS"].length - 1 ? counter.value++ : counter.value = 0
+function onClickPreviousVideo() {
+    counterVideos.value < props.workout["videoURLS"].length - 1 ? counterVideos.value++ : counterVideos.value = 0
 }
-function onClickRightVideo() {
-    counter.value == 0 ? counter.value = props.workout["videoURLS"].length - 1 : counter.value--
+function onClickNextVideo() {
+    counterVideos.value == 0 ? counterVideos.value = props.workout["videoURLS"].length - 1 : counterVideos.value--
 }
+
         
 </script>
 
@@ -35,11 +36,11 @@ function onClickRightVideo() {
         </div>
         <p class="subtitle">Strength Circuit Exercises:</p>
         <div style="display:flex; flex-direction: row; align-items: center;">
-            <span @click="onClickLeftVideo" class="material-symbols-outlined chevron-button">
+            <span @click="onClickPreviousVideo" class="material-symbols-outlined chevron-button">
                 arrow_back_ios
             </span>
             <iframe style="width:80%; height:80%" :src="[`https://www.youtube.com/embed/${videoURL.split('=')[1]}`]" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            <span @click="onClickRightVideo" class="material-symbols-outlined chevron-button">
+            <span @click="onClickNextVideo" class="material-symbols-outlined chevron-button">
                 arrow_forward_ios
             </span>
         </div>

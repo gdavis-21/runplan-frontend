@@ -41,6 +41,7 @@ function addGoal() {
         color: #FFFFFF;
         position:relative;
         top:-10px;
+        left:20px;
     }
     .subtitle {
         font-family: "Montserrat";
@@ -57,6 +58,6 @@ function addGoal() {
         cursor:pointer;
         position: relative;
         top:5px;
-        left:12.5%;
+        left:18%;
     }
 </style>
