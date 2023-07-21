@@ -15,11 +15,12 @@
     let mql
 
     function handleMqlChange(e) {
-        isSmallScreen.value = e.matches
+        mql = window.matchMedia('(max-width: 640px)')
+        isSmallScreen.value = mql.matches
     }
 
     onMounted(() => {
-            mql = window.matchMedia('(max-width: 1256px)')
+            mql = window.matchMedia('(max-width: 640px)')
             isSmallScreen.value = mql.matches
             mql.addEventListener("change", handleMqlChange)
         }
@@ -33,26 +34,27 @@
 </script>
 
 <template>
+        <div v-if="isSmallScreen" style="display:flex; flex-direction: row; justify-content: space-between; align-items:center; margin-left:2.5%; margin-right: 5%; position:relative; top:0.5%">
+            <img style="width:30%;" src="/src/assets/Fleet-Feet-Logo.png">
+            <span style="color: #343434; font-size:6vw;" class="material-symbols-outlined">
+                menu
+            </span>
+        </div>
+        <p v-if="isSmallScreen" style="text-align: center; font-size: 1.3rem; padding-left:2.5%; padding-right:2.5%;color: #343434; font-family: 'Montserrat'; font-weight: 900;">Summer Warriors - Week 5</p>
+        <div v-if="!isSmallScreen" style="display:flex; flex-direction: row; justify-content: space-between; align-items:center; margin-left:2.5%; margin-right: 5%; position:relative;">
+            <img style="width:17%;" src="/src/assets/Fleet-Feet-Logo.png">
+            <span style="font-size:3.5vw;" class="material-symbols-outlined">
+                menu
+            </span>
+        </div>
+        <p v-if="!isSmallScreen" class="program-name">Summer Warriors - Week 5</p>
     <div class="background">
-        <div v-if="{isSmallScreen}" style="display:flex; flex-direction: row; justify-content: space-between; align-items: center; margin-left:5%; margin-right: 5%">
-            <img style="width:40%;" src="/src/assets/Fleet-Feet-Logo.png">
-            <span style="color:black; font-size:3rem;" class="material-symbols-outlined">
-                menu
-            </span>
-        </div>
-        <div class="nav-bar-container">
-            <img class="logo" src="/src/assets/Fleet-Feet-Logo.png">
-            <p class="title">Summer Warriors - Week 5</p>
-            <span class="material-symbols-outlined menu-icon">
-                menu
-            </span>
-        </div>
         <div class="grid-container">
             <div class="flex-workout-container">
                 <span class="material-symbols-outlined previous-workout-button">
                     arrow_back_ios
                 </span>
-                <div class="container">
+                <div class="container" style="height:100%">
                     <WorkoutComponent :workout="userData.workouts[0]"/>
                 </div>
                 <span class="material-symbols-outlined next-workout-button">
@@ -94,30 +96,27 @@
     .background {
         position: relative;
         margin: auto;
-        top: 2%;
         border-radius: 50px;
-        background-color: #5A9E96;
-        width: 90%;
-        height:95%;
-        min-height: 750px;
+        background-color: #ffffff;
+        height:70%;
     }
     .nav-bar-container {
         display: flex;
         flex-direction: row;
         justify-content: space-around;
+        align-items: end;
         font-family: "Montserrat";
         font-weight: 900;
-        color: #FFFF;
-        font-size: 1.25rem
     }
     .grid-container {
         display:grid;
-        grid-template-columns: 1fr 0.9fr 0.9fr;
+        grid-template-columns: 1fr 0.8fr 0.8fr;
         grid-template-rows: 1fr 1fr;
-        height:85%;
-        margin:20px;
+        height: 85%;
         row-gap: 20px;
-        column-gap: 60px;
+        column-gap: 20px;
+        margin-left:5%;
+        margin-right:5%;
     }
     .flex-workout-container {
         grid-row-start: 1;
@@ -133,15 +132,24 @@
         background-color: #343434;
         overflow: auto;
         overflow-wrap: break-word;
-        height:100%;
+        height:300px;
     }
-    .title {
+    .program-name {
         font-size: 1.5rem;
+        color: #343434;
+        margin-bottom:0;
+        margin-top:0;
+        margin-bottom:20px;
+        font-family: "Montserrat";
+        font-weight: 900;
+        text-align: center;
+        position:relative;
+        left:2%;
     }
     .logo {
         position:relative;
         top:20px;
-        left:-50px;
+        left:-200px;
         width:129px;
         height:57px;
     }
@@ -150,16 +158,17 @@
         top: 20px;
         left:50px;
         font-size:2.5rem;
+        color: #343434;
     }
     .previous-workout-button {
-        color:#FFFF;
+        color:#343434;
         cursor: pointer;
     }
     .next-workout-button {
-        color:#FFFF;
+        color:#343434;
         cursor: pointer;
     }
-    @media screen and (max-width: 1256px) {
+    @media screen and (max-width: 640px) {
 
         .background {
             position: relative;
@@ -169,6 +178,7 @@
             background-color: #ffffff;
             width: 100%;
             height:2750px;
+            max-width:400px;
         }
         .grid-container {
             display:flex;
@@ -210,11 +220,6 @@
             text-align: center;
         }
         
-        .title {
-            font-size: 6vw;
-            margin-bottom: 0;
-            color: #343434
-        }
         .logo {
             display:none;
         }
@@ -224,12 +229,15 @@
             top: 20px;
             left:50px;
             font-size:2.5rem;
+            color: #343434;
         }
         .previous-workout-button {
             color: #343434;
+            margin-right: 1%;
         }
         .next-workout-button {
             color: #343434;
+            margin-left:1%;
         }
     }
 </style>
