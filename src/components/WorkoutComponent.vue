@@ -25,7 +25,7 @@ function onClickNextVideo() {
     <div class="inner-container">
         <p class="title">{{ Date(workout["date"]) === Date(today) ? "Today's Workout" : workout["date"] }}</p>
         <p class="subtitle">🏃‍♂️ Run:</p>
-        <p class="value margin-bottom">+ {{ workout["distance"] }} at a {{ workout["pace"] }} pace.</p>
+        <p class="value margin-bottom">+ {{ workout["distance"] }} at a {{ workout["effort"] }} pace.</p>
         <p class="subtitle">🏋️‍♀️ 20 min. AMRAP Strength Circuit:</p>
         <div class="margin-bottom">
             <p class="value" v-for="circuitItem in workout['strengthCircuit']" :key="circuitItem">+ {{ circuitItem }}</p>

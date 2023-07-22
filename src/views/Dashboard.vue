@@ -44,20 +44,16 @@
 
 <template>
         <div v-if="isSmallScreen" style="display:flex; flex-direction: row; justify-content: space-between; align-items:center; margin-left:2.5%; margin-right: 5%; position:relative; top:0.5%">
-            <img style="width:25%;" src="/src/assets/Fleet-Feet-Logo.png">
+            <!-- <img style="width:25%;" src="/src/assets/Fleet-Feet-Logo.png"> -->
             <span style="color: #343434; font-size:6vw; cursor: pointer;" class="material-symbols-outlined">
                 menu
             </span>
         </div>
-        <p v-if="isSmallScreen" style="text-align: center; font-size: 1.3rem; padding-left:2.5%; padding-right:2.5%;color: #343434; font-family: 'Montserrat'; font-weight: 900;">Summer Warriors - Week 5</p>
-        <div v-if="!isSmallScreen" style="display:flex; flex-direction: row; justify-content: space-between; align-items:center; margin-left:2.5%; margin-right: 5%; position:relative;">
-            <img style="width:17%;" src="/src/assets/Fleet-Feet-Logo.png">
-            <span style="font-size:3.5vw; cursor: pointer;" class="material-symbols-outlined">
-                menu
-            </span>
-        </div>
-        <p v-if="!isSmallScreen" class="program-name">Summer Warriors - Week 5</p>
     <div class="background">
+        <p v-if="!isSmallScreen" class="program-name">Summertime Grind - Week 5</p>
+        <span style="font-size:40px; cursor: pointer; position:absolute; left:94%; top: 1.5%; color:white;" class="material-symbols-outlined">
+                menu
+        </span>
         <div class="grid-container">
             <div class="flex-workout-container">
                 <span @click="onClickPreviousWorkout" class="material-symbols-outlined previous-workout-button">
@@ -109,6 +105,7 @@
     }
 
     .menu-container {
+        display:none;
         background-color:red;
         position:absolute;
         top:0%;
@@ -121,9 +118,11 @@
         position: relative;
         margin: auto;
         border-radius: 50px;
-        background-color: #ffffff;
-        height:70%;
+        background-color: #9f9e9e;
+        top:5%;
+        height:700px;
         width:90%;
+        min-width: 1100px;
     }
     .nav-bar-container {
         display: flex;
@@ -140,6 +139,10 @@
         height: 85%;
         row-gap: 20px;
         column-gap: 15px;
+        padding-top:25px;
+        padding-left:5%;
+        padding-right:5%;
+
     }
     .flex-workout-container {
         grid-row-start: 1;
@@ -159,15 +162,14 @@
     }
     .program-name {
         font-size: 1.5rem;
-        color: #343434;
+        color: #ffffff;
         margin-bottom:0;
         margin-top:0;
-        margin-bottom:20px;
         font-family: "Montserrat";
         font-weight: 900;
         text-align: center;
         position:relative;
-        left:2%;
+        top:10px;
     }
     .logo {
         position:relative;
@@ -184,12 +186,14 @@
         color: #343434;
     }
     .previous-workout-button {
-        color:#343434;
+        color:#ffffff;
         cursor: pointer;
+        margin-right:2%;
     }
     .next-workout-button {
-        color:#343434;
+        color:#ffffff;
         cursor: pointer;
+        margin-left:2%;
     }
     @media screen and (max-width: 640px) {
 
@@ -202,6 +206,7 @@
             width: 100%;
             height:100%;
             max-width:400px;
+            min-width: 0px;
         }
         .grid-container {
             display:flex;

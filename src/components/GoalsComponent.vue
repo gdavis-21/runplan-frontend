@@ -40,14 +40,14 @@ function addGoal() {
         font-weight:900;
         color: #FFFFFF;
         position:relative;
-        top:-10px;
-        left:20px;
+        left:10px;
     }
     .subtitle {
         font-family: "Montserrat";
         font-size: 0.8rem;
         color: #FFFFFF;
         font-weight:800;
+        margin-top:0;
     }
     .value {
         font-size:0.7rem;
