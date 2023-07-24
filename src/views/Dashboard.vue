@@ -19,6 +19,22 @@
     function onClickNextWorkout() {
         counterWorkouts.value == 0 ? counterWorkouts.value = userData["workouts"].length - 1 : counterWorkouts.value--
     }
+    function mouseUpMenu() {
+        if (!isSettingsVisible.value) {
+            settingsDisplayOption.value = "block"
+        }
+        isSettingsVisible.value = !isSettingsVisible.value
+    }
+    function animationEndSettings() {
+        if (!isSettingsVisible.value) {
+            settingsDisplayOption.value = "none"
+        }
+    }
+    function animationStartSettings() {
+        if (isSettingsVisible.value) {
+            settingsDisplayOption.value = "block"
+        }
+    }
 
     const isSmallScreen = ref("")
     let mql
@@ -39,21 +55,24 @@
         mql.removeEventListener("change", handleMqlChange)
     })
 
+    const isSettingsVisible = ref(0)
+    const settingsDisplayOption = ref("none")
 
 </script>
 
 <template>
-        <div v-if="isSmallScreen" style="display:flex; flex-direction: row; justify-content: space-between; align-items:center; margin-left:2.5%; margin-right: 5%; position:relative; top:0.5%">
-            <!-- <img style="width:25%;" src="/src/assets/Fleet-Feet-Logo.png"> -->
-            <span style="color: #343434; font-size:6vw; cursor: pointer;" class="material-symbols-outlined">
-                menu
-            </span>
-        </div>
-    <div class="background">
-        <p v-if="!isSmallScreen" class="program-name">Summertime Grind - Week 5</p>
-        <span style="font-size:40px; cursor: pointer; position:absolute; left:94%; top: 1%; color:white;" class="material-symbols-outlined">
+    <div v-if="isSmallScreen" style="position: absolute; height:1800px; width:100%;">
+        <span style="cursor: pointer; position:sticky; font-size:2.5rem; top: 20px; left:92%; color:rgb(255, 255, 255); z-index: 11;" class="material-symbols-outlined" @mouseup="mouseUpMenu">
                 menu
         </span>
+    </div>
+    <div v-if="!isSmallScreen" style="min-width: 1000px;">
+        <span style="font-size:40px; cursor: pointer; position:relative; left:95%; top: 10px; color:rgb(255, 255, 255); z-index: 11;" class="material-symbols-outlined" @mouseup="mouseUpMenu">
+            menu
+        </span>
+    </div>
+    <div class="background">
+        <p class="program-name">Summertime Grind - Week 5</p>
         <div class="grid-container">
             <div class="flex-workout-container">
                 <span @click="onClickPreviousWorkout" class="material-symbols-outlined previous-workout-button">
@@ -90,7 +109,7 @@
             </div>
         </div>
     </div>
-    <div class="menu-container">
+    <div class="settings" :class="[{'ease-in-animation': isSettingsVisible}, {'ease-out-animation': !isSettingsVisible}]" @animationstart="animationStartSettings" @animationend="animationEndSettings" :style="{display: settingsDisplayOption}">
     </div>
 </template>
 
@@ -100,24 +119,49 @@
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
 
-
-    .menu-container {
-        display:none;
-        background-color:red;
+    html {
+        background-color: #07a5da;
+    }
+    .settings {
+        background-color:#343434;;
         position:absolute;
         top:0%;
         left:100%;
         height:100%;
-        width:200px;
+        width:100vw;
+        z-index: 10;
+    }
+
+    .ease-in-animation {
+        animation: slideRight 0.5s ease forwards;
+    }
+    .ease-out-animation {
+        animation: slideLeft 0.5s ease forwards;
+    }
+
+    @keyframes slideRight {
+        0% {
+            transform: translate(0px, 0px)
+        }
+        100% {
+            transform: translate(-100vw, 0px)
+        }
+    }
+    @keyframes slideLeft {
+        0% {
+            transform: translate(-100vw, 0px)
+        }
+        100% {
+            transform: translate(0px, 0px)
+        }
     }
 
     .background {
         position: relative;
         margin: auto;
         border-radius: 50px;
-        background-color: #9f9e9e;
-        top:2.5%;
-        height:750px;
+        background-color: #057fa8;
+        height:700px;
         width:92.5%;
         min-width: 1000px;
     }
@@ -133,10 +177,10 @@
         display:grid;
         grid-template-columns: 1fr 0.8fr 0.8fr;
         grid-template-rows: 1fr 1fr;
-        height: 85%;
+        height: 60%;
         row-gap: 20px;
         column-gap: 15px;
-        padding-top:50px;
+        padding-top:25px;
         padding-left:5%;
         padding-right:5%;
 
@@ -181,6 +225,7 @@
         left:50px;
         font-size:2.5rem;
         color: #343434;
+        z-index: 11;
     }
     .previous-workout-button {
         color:#ffffff;
@@ -192,22 +237,26 @@
         cursor: pointer;
         margin-left:2%;
     }
+
     @media screen and (max-width: 640px) {
 
         .background {
             position: relative;
             margin: auto;
-            top: 0%;
+            top: 5%;
             border-radius: 50px;
-            background-color: #ffffff;
+            background-color: #057fa8;
             width: 100%;
-            height:100%;
+            height:1800px;
             max-width:400px;
             min-width: 0px;
         }
         .grid-container {
             display:flex;
+            position: relative;
+            top:20px;
             flex-direction: column;
+            height:100%;
         }
         .flex-workout-container {
             display: flex;
@@ -221,7 +270,6 @@
             background-color: #343434;
             overflow: auto;
             overflow-wrap: break-word;
-            height:100%;
             width:100%;
             padding-bottom: 5%
         }
@@ -245,8 +293,10 @@
             text-align: center;
         }
         
-        .logo {
-            display:none;
+        .program-name {
+            font-size: 1.5rem;
+            padding-left: 7.5%;
+            padding-right: 7.5%;
         }
         .menu-icon {
             display:none;
@@ -257,12 +307,15 @@
             color: #343434;
         }
         .previous-workout-button {
-            color: #343434;
+            color: #ffffff;
             margin-right: 1%;
         }
         .next-workout-button {
-            color: #343434;
+            color: #ffffff;
             margin-left:1%;
+        }
+        .settings {
+            width: 100vw;
         }
     }
 </style>
