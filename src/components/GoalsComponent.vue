@@ -3,10 +3,24 @@ import { ref } from "vue"
 const props = defineProps({goals: Object})
 const goals = ref([...props.goals])
 const goalEmojis = ["🎯", "🏁", "💯", "🏆", "💪", "✨", "🌟", "🔥"]
-const newGoal = ref("")
 
-function addGoal() {
-    goals.value.push({"name": "Example Goal"})
+async function onUserAddGoalEvent(e) {
+    goals.value.push({"name": "New Goal", "isComplete": false})
+    const response = await fetch("http://127.0.0.1:8000/fetchCSRFToken/")
+    const csrfToken = document.cookie.split("=")[1]
+    try {
+        const headers = {
+            "X-Csrftoken": csrfToken,
+        }
+        const response = await fetch("http://127.0.0.1:8000/addUserGoal/", {
+            method: "POST",
+            headers: headers,
+            credentials: "include"
+        })
+    }
+    catch {
+
+    }
 }
 
 async function onInputGoalEvent(e, index) {
@@ -35,7 +49,7 @@ async function onInputGoalEvent(e, index) {
 <template>
     <div class="inner-container">
         <p class="title" style="margin-top:5%;">My Goals
-            <span class="material-symbols-outlined plus-button" @click="addGoal">
+            <span class="material-symbols-outlined plus-button" @click="onUserAddGoalEvent">
                 add
             </span> 
         </p>
