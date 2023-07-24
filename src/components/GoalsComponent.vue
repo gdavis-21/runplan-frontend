@@ -6,21 +6,41 @@ const goalEmojis = ["🎯", "🏁", "💯", "🏆", "💪", "✨", "🌟", "🔥
 const newGoal = ref("")
 
 function addGoal() {
-
     goals.value.push({"name": "Example Goal"})
+}
+
+async function onInputGoalEvent(e, index) {
+    const response = await fetch("http://127.0.0.1:8000/fetchCSRFToken/")
+    const csrfToken = document.cookie.split("=")[1]
+    try {
+        const formData = new FormData()
+        formData.append(index, e.target.textContent)
+        const headers = {
+            "X-Csrftoken": csrfToken,
+        }
+        const response = await fetch("http://127.0.0.1:8000/updateUserGoals/", {
+            method: "POST",
+            body: formData,
+            headers: headers,
+            credentials: "include"
+        })
+    }
+    catch {
+
+    }
 }
 
 </script>
 
 <template>
     <div class="inner-container">
-        <p class="title" style="">My Goals
+        <p class="title" style="margin-top:5%;">My Goals
             <span class="material-symbols-outlined plus-button" @click="addGoal">
                 add
             </span> 
         </p>
         <p class="subtitle" v-for="(goal, index) in goals" :key="goal.name">
-            {{ goalEmojis[index] }} Goal #{{ index + 1 }}: <p class="value" style="line-height:200%;" contenteditable="true">{{ goal.name }}</p>
+            {{ goalEmojis[index] }} Goal #{{ index + 1 }}: <p class="value" style="line-height:200%;" contenteditable="true" @blur="(e) => onInputGoalEvent(e, index)">{{ goal.name }}</p>
         </p>
     </div>
 </template>

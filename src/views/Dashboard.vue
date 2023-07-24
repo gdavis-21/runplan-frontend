@@ -51,7 +51,7 @@
         </div>
     <div class="background">
         <p v-if="!isSmallScreen" class="program-name">Summertime Grind - Week 5</p>
-        <span style="font-size:40px; cursor: pointer; position:absolute; left:94%; top: 1.5%; color:white;" class="material-symbols-outlined">
+        <span style="font-size:40px; cursor: pointer; position:absolute; left:94%; top: 1%; color:white;" class="material-symbols-outlined">
                 menu
         </span>
         <div class="grid-container">
@@ -100,9 +100,6 @@
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
 
-    html {
-        width:98%;
-    }
 
     .menu-container {
         display:none;
@@ -119,10 +116,10 @@
         margin: auto;
         border-radius: 50px;
         background-color: #9f9e9e;
-        top:5%;
-        height:700px;
-        width:90%;
-        min-width: 1100px;
+        top:2.5%;
+        height:750px;
+        width:92.5%;
+        min-width: 1000px;
     }
     .nav-bar-container {
         display: flex;
@@ -134,12 +131,12 @@
     }
     .grid-container {
         display:grid;
-        grid-template-columns: 1fr 0.9fr 0.9fr;
+        grid-template-columns: 1fr 0.8fr 0.8fr;
         grid-template-rows: 1fr 1fr;
         height: 85%;
         row-gap: 20px;
         column-gap: 15px;
-        padding-top:25px;
+        padding-top:50px;
         padding-left:5%;
         padding-right:5%;
 
