@@ -24,6 +24,12 @@ async function onUserAddGoalEvent(e) {
 }
 
 async function onInputGoalEvent(e, index) {
+    if (e.target.textContent == "") {
+        goals.value[index].name = ""
+        goals.value = goals.value.filter((goal) => {
+                return goal.name !== ""
+        })
+    }
     const response = await fetch("http://127.0.0.1:8000/fetchCSRFToken/")
     const csrfToken = document.cookie.split("=")[1]
     try {
