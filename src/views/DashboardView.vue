@@ -5,10 +5,14 @@
     import WeatherComponent from '../components/WeatherComponent.vue';
     import { ref, onMounted, onUnmounted } from 'vue';
 
-    const upcomingRacesResponse = await fetch("http://127.0.0.1:8000/fetchUpcomingRaces")
+    const upcomingRacesResponse = await fetch("http://127.0.0.1:8000/fetchUpcomingRaces", {
+    credentials: "include"
+    })
     const upcomingRaces = await upcomingRacesResponse.json()
 
-    const userDataResponse = await fetch("http://127.0.0.1:8000/fetchUserData")
+    const userDataResponse = await fetch("http://127.0.0.1:8000/fetchUserData", {
+    credentials: "include"
+    })
     const userData = await userDataResponse.json()
 
     const counterWorkouts = ref(0)
@@ -61,18 +65,20 @@
 </script>
 
 <template>
-    <div v-if="isSmallScreen" style="position: absolute; height:1800px; width:100%;">
-        <span style="cursor: pointer; position:sticky; font-size:2.5rem; top: 20px; left:92%; color:rgb(255, 255, 255); z-index: 11;" class="material-symbols-outlined" @mouseup="mouseUpMenu">
+    <div v-if="isSmallScreen" style="position: absolute; height:1800px; width:80%; display:flex; flex-direction: row;">
+        <p class="logo">Run Plan</p>
+        <span style="cursor: pointer; position:relative; font-size:2.5rem; top: 5px; left:75%; color:#343434; z-index: 11;" class="material-symbols-outlined" @mouseup="mouseUpMenu">
                 menu
         </span>
     </div>
+    <p v-if="!isSmallScreen" class="logo" style="position: absolute;">Run Plan</p>
     <div v-if="!isSmallScreen" style="min-width: 1000px;">
-        <span style="font-size:40px; cursor: pointer; position:relative; left:95%; top: 10px; color:rgb(255, 255, 255); z-index: 11;" class="material-symbols-outlined" @mouseup="mouseUpMenu">
+        <span style="font-size:40px; cursor: pointer; position:relative; left:95%; top: 10px; color:#343434; z-index: 11;" class="material-symbols-outlined" @mouseup="mouseUpMenu">
             menu
         </span>
     </div>
     <div class="background">
-        <p class="program-name">Summertime Grind - Week 5</p>
+        <p class="program-name">Summertime Grind</p>
         <div class="grid-container">
             <div class="flex-workout-container">
                 <span @click="onClickPreviousWorkout" class="material-symbols-outlined previous-workout-button">
@@ -119,11 +125,8 @@
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
 
-    html {
-        background-color: #07a5da;
-    }
     .settings {
-        background-color:#343434;;
+        background-color:#0387ba;;
         position:absolute;
         top:0%;
         left:100%;
@@ -160,7 +163,7 @@
         position: relative;
         margin: auto;
         border-radius: 50px;
-        background-color: #057fa8;
+        background-color: #ffffff;
         height:700px;
         width:92.5%;
         min-width: 1000px;
@@ -203,7 +206,7 @@
     }
     .program-name {
         font-size: 1.5rem;
-        color: #ffffff;
+        color: #343434;
         margin-bottom:0;
         margin-top:0;
         font-family: "Montserrat";
@@ -211,13 +214,17 @@
         text-align: center;
         position:relative;
         top:10px;
+        left:40px;
     }
     .logo {
-        position:relative;
-        top:20px;
-        left:-200px;
-        width:129px;
-        height:57px;
+        font-family: "Roboto";
+        font-size: 2rem;
+        color: #343434;
+        position: relative;
+        top:-20px;
+        left:5%;
+        z-index: 11;
+
     }
     .menu-icon {
         position:relative;
@@ -241,11 +248,8 @@
     @media screen and (max-width: 640px) {
 
         .background {
-            position: relative;
-            margin: auto;
-            top: 5%;
-            border-radius: 50px;
-            background-color: #057fa8;
+            top: 10%;
+            background-color: #ffffff;
             width: 100%;
             height:1800px;
             max-width:400px;
@@ -254,7 +258,6 @@
         .grid-container {
             display:flex;
             position: relative;
-            top:20px;
             flex-direction: column;
             height:100%;
         }
@@ -271,15 +274,20 @@
             overflow: auto;
             overflow-wrap: break-word;
             width:100%;
-            padding-bottom: 5%
+            padding-bottom: 5%;
+            overflow: hidden;
+        }
+        .container:nth-child(1) {
+            overflow: visible;
+            height:100%;
         }
         .workout {
             width:90%;
         }
         .inner-container {
             padding: 0;
-            margin-left:2.5%;
-            margin-right:2.5%;
+            margin-left:5%;
+            margin-right:5%;
         }
         .nav-bar-container {
             display: flex;
@@ -292,11 +300,12 @@
             font-size: 1.25rem;
             text-align: center;
         }
-        
         .program-name {
             font-size: 1.5rem;
-            padding-left: 7.5%;
-            padding-right: 7.5%;
+            padding-left: 12%;
+            padding-right: 12%;
+            left:0;
+            color:#343434;
         }
         .menu-icon {
             display:none;
@@ -307,11 +316,11 @@
             color: #343434;
         }
         .previous-workout-button {
-            color: #ffffff;
+            color: #000000;
             margin-right: 1%;
         }
         .next-workout-button {
-            color: #ffffff;
+            color: #000000;
             margin-left:1%;
         }
         .settings {

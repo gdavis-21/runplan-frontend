@@ -1,11 +1,10 @@
 <script setup>
-import Dashboard from './views/Dashboard.vue';
 
 </script>
 
 <template>
   <Suspense>
-    <Dashboard/>
+    <RouterView></RouterView>
   </Suspense>
 </template>
 

@@ -27,8 +27,8 @@ const date = new Date();
 <style>
     .inner-container {
         line-height: 140%;
-        padding-left:2.5%;
-        padding-right:2.5%;
+        padding-left:5%;
+        padding-right:5%;
     }
 </style>
 
@@ -42,11 +42,11 @@ const date = new Date();
         font-weight:900;
     }
     .subtitle {
-        font-size: 0.8rem;
+        font-size: 1rem;
         font-weight:500;
     }
     .value {
-        font-size: 0.7rem;
+        font-size: 0.8rem;
         font-weight:300;
         font-style: italic;
     }

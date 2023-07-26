@@ -18,8 +18,8 @@ props.races.sort(sortRaceObjecs)
 <style>
     .inner-container {
         line-height: 100%;
-        padding-left:2.5%;
-        padding-right:2.5%;
+        padding-left:5%;
+        padding-right:5%;
     }
 </style>
 
@@ -32,13 +32,13 @@ props.races.sort(sortRaceObjecs)
     }
     .subtitle {
         font-family: "Montserrat";
-        font-size: 0.8rem;
+        font-size: 1rem;
         color: #FFFFFF;
         font-weight:800;
     }
     .value {
         font-family: "Montserrat";
-        font-size: 0.7rem;
+        font-size: 0.8rem;
         color: #FFFFFF;
         font-weight:300;
         font-style: italic;

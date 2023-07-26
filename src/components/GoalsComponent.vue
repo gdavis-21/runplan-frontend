@@ -68,8 +68,8 @@ async function onInputGoalEvent(e, index) {
 <style>
     .inner-container {
         line-height: 100%;
-        padding-left:2.5%;
-        padding-right:2.5%;
+        padding-left:5%;
+        padding-right:5%;
     }
 </style>
 
@@ -84,13 +84,13 @@ async function onInputGoalEvent(e, index) {
     }
     .subtitle {
         font-family: "Montserrat";
-        font-size: 0.8rem;
+        font-size: 1rem;
         color: #FFFFFF;
         font-weight:800;
         margin-top:0;
     }
     .value {
-        font-size:0.7rem;
+        font-size:0.8rem;
         font-weight:300;
         font-style: italic;
     }
