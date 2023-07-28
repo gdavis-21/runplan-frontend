@@ -3,8 +3,13 @@ import { ref, computed } from "vue"
 
 const props = defineProps({workout: Object})
 
-const date = new Date()
-const today = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
+let yesterday = new Date()
+let today = new Date()
+let tomorrow = new Date()
+const workoutDate = new Date(props.workout["date"])
+
+yesterday = yesterday.setDate(today.getDate() - 1)
+tomorrow = tomorrow.setDate(today.getDate() + 1)
 
 const counterVideos = ref(0)
 const videoURL = computed(() => {
@@ -18,19 +23,23 @@ function onClickNextVideo() {
     counterVideos.value == 0 ? counterVideos.value = props.workout["videoURLS"].length - 1 : counterVideos.value--
 }
 
+const title = computed(() => {
+    return workoutDate.getTime() === today ? "Today's Workout" : workoutDate.getTime() === yesterday ? "Yesterday's Workout" : workoutDate.getTime() === tomorrow ? "Tomorrow's Workout" : props.workout["date"]
+})
+
         
 </script>
 
 <template>
     <div class="inner-container">
-        <p class="title">{{ Date(workout["date"]) === Date(today) ? "Today's Workout" : workout["date"] }}</p>
-        <p class="subtitle">🏃‍♂️ Run:</p>
-        <p class="value margin-bottom">+ {{ workout["distance"] }} at a {{ workout["effort"] }} pace.</p>
-        <p class="subtitle">🏋️‍♀️ 20 min. AMRAP Strength Circuit:</p>
+        <p class="title">{{ title }}</p>
+        <p class="subtitle">Run:</p>
+        <p class="value margin-bottom">+ Run {{ workout["distance"] }} at a {{ workout["effort"] }} pace.</p>
+        <p class="subtitle">20 Min. AMRAP Strength Circuit:</p>
         <div class="margin-bottom">
             <p class="value" v-for="circuitItem in workout['strengthCircuit']" :key="circuitItem">+ {{ circuitItem }}</p>
         </div>
-        <p class="subtitle">🧘‍♀️ Mobility Challenge:</p>
+        <p class="subtitle">Mobility Challenge:</p>
         <div class="margin-bottom">
             <p class="value" v-for="challenge in workout['mobilityChallenge']" :key="challenge">+ {{  challenge }}</p>
         </div>
@@ -48,6 +57,11 @@ function onClickNextVideo() {
 </template>
 
 <style scoped>
+    .inner-container {
+        line-height: 140%;
+        padding-left:5%;
+        padding-right:5%;
+    }
 
     .margin-bottom {
         margin-bottom: 20px;
@@ -58,6 +72,9 @@ function onClickNextVideo() {
         font-size: 1.2rem;
         font-weight:900;
         color: #FFFFFF;
+        text-decoration: underline;
+        text-decoration-thickness: 3px;
+        text-underline-offset: 5px;
     }
     .subtitle {
         font-family: "Montserrat";

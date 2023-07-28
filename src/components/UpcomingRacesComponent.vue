@@ -29,6 +29,9 @@ props.races.sort(sortRaceObjecs)
         font-size: 1.2rem;
         font-weight:900;
         color: #FFFFFF;
+        text-decoration: underline;
+        text-decoration-thickness: 3px;
+        text-underline-offset: 5px;
     }
     .subtitle {
         font-family: "Montserrat";

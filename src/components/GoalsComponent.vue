@@ -2,7 +2,7 @@
 import { ref } from "vue"
 const props = defineProps({goals: Object})
 const goals = ref([...props.goals])
-const goalEmojis = ["🎯", "🏁", "💯", "🏆", "💪", "✨", "🌟", "🔥"]
+// const goalEmojis = ["🎯", "🏁", "💯", "🏆", "💪", "✨", "🌟", "🔥"]
 
 async function onUserAddGoalEvent(e) {
     goals.value.push({"name": "New Goal", "isComplete": false})
@@ -60,7 +60,7 @@ async function onInputGoalEvent(e, index) {
             </span> 
         </p>
         <p class="subtitle" v-for="(goal, index) in goals" :key="goal.name">
-            {{ goalEmojis[index] }} Goal #{{ index + 1 }}: <p class="value" style="line-height:200%;" contenteditable="true" @blur="(e) => onInputGoalEvent(e, index)">{{ goal.name }}</p>
+          <p class="value" style="line-height:200%;" contenteditable="true" @blur="(e) => onInputGoalEvent(e, index)">+ {{ goal.name }}</p>
         </p>
     </div>
 </template>
@@ -81,6 +81,9 @@ async function onInputGoalEvent(e, index) {
         color: #FFFFFF;
         position:relative;
         left:10px;
+        text-decoration: underline;
+        text-decoration-thickness: 3px;
+        text-underline-offset: 5px;
     }
     .subtitle {
         font-family: "Montserrat";

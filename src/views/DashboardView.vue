@@ -119,7 +119,7 @@
     </div>
 </template>
 
-<style>
+<style scoped>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,600;0,900;1,500&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,300&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
@@ -209,14 +209,14 @@
         color: #343434;
         margin-bottom:0;
         margin-top:0;
-        font-family: "Montserrat";
+        font-family: "Roboto";
         font-weight: 900;
         text-align: center;
         position:relative;
         top:10px;
         left:40px;
     }
-    .logo {
+    /* .logo {
         font-family: "Roboto";
         font-size: 2rem;
         color: #343434;
@@ -225,7 +225,7 @@
         left:5%;
         z-index: 11;
 
-    }
+    } */
     .menu-icon {
         position:relative;
         top: 20px;
