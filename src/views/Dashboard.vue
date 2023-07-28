@@ -104,7 +104,7 @@
                     <WorkoutComponent :workout="workouts[workoutIndex + 1]"/>
                 </div>
                 <div class="tomorrow-workout">
-                    <WorkoutComponent :workout="workouts[workoutIndex + 2]"/>
+                    <WorkoutComponent :workout="workouts[workoutIndex + 2 ]"/>
                 </div>
                 <span class="material-symbols-outlined next-workout-button" @click="onClickNextWorkout">
                     arrow_forward_ios
