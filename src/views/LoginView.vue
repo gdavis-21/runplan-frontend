@@ -25,7 +25,6 @@ async function submitUserLogin(e) {
             body: formData,
             headers: headers,
             credentials: "include",
-            cookies: coo
         })
         // If success, redirect user to the dashboard.
         if (response.ok) {
