@@ -15,6 +15,7 @@ async function submitUserLogin(e) {
         const formData = new FormData()
         formData.append("username", username.value)
         formData.append("password", password.value)
+        alert(csrfToken);
 
         const headers = {
             "X-CSRFToken": csrfToken,
