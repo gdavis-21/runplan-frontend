@@ -1,13 +1,14 @@
 <script setup>
 import { ref } from "vue"
 import router from "/src/router/index.js"
+import { BASE_URL } from '/src/main.js'
 
 const username = ref("")
 const password = ref("")
 
 async function submitUserLogin(e) {
     e.preventDefault()
-    const csrfTokenResponse = await fetch("http://127.0.0.1:8000/fetchCSRFToken/", {
+    const csrfTokenResponse = await fetch(`${BASE_URL}` + "/fetchCSRFToken/", {
     credentials: "include"
 })
     const csrfToken = document.cookie.split("=")[1]
@@ -20,7 +21,7 @@ async function submitUserLogin(e) {
             "X-Csrftoken": csrfToken,
         }
 
-        const response = await fetch("http://127.0.0.1:8000/authenticateUser/", {
+        const response = await fetch(`${BASE_URL}` + "/authenticateUser/", {
             method: "POST",
             body: formData,
             headers: headers,
