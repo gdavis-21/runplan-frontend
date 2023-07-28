@@ -6,11 +6,11 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "heroku-postbuild": "npm install --only=dev && npm run build",
     "start": "serve -s dist"
   },
   "dependencies": {
     "vue": "^3.3.4",
-    "serve": "^14.2.0",
     "vue-router": "^4.2.2"
   },
   "devDependencies": {
