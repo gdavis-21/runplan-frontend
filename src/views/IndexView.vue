@@ -1,7 +1,8 @@
 <script setup>
 import router from "/src/router/index.js"
+import { BASE_URL } from '/src/main.js'
 
-const response = await fetch("http://127.0.0.1:8000/index", {
+const response = await fetch(`${BASE_URL}` + "/index/", {
     credentials: "include"
 })
 if (response.ok) {
