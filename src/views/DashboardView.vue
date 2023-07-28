@@ -5,7 +5,9 @@
     import WeatherComponent from '../components/WeatherComponent.vue';
     import { ref, onMounted, onUnmounted } from 'vue';
 
-    const upcomingRacesResponse = await fetch("http://127.0.0.1:8000/fetchUpcomingRaces", {
+    const BASE_URL = "https://run-plan-app-cd5c57bf131d.herokuapp.com/"
+
+    const upcomingRacesResponse = await fetch("http://127.0.0.1:8000/fetch", {
     credentials: "include"
     })
     const upcomingRaces = await upcomingRacesResponse.json()

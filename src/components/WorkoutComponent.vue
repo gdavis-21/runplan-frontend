@@ -8,8 +8,8 @@ let today = new Date()
 let tomorrow = new Date()
 const workoutDate = new Date(props.workout["date"])
 
-yesterday = yesterday.setDate(today.getDate() - 1)
-tomorrow = tomorrow.setDate(today.getDate() + 1)
+yesterday = new Date(yesterday.setDate(today.getDate() - 1))
+tomorrow = new Date(tomorrow.setDate(today.getDate() + 1))
 
 const counterVideos = ref(0)
 const videoURL = computed(() => {
@@ -23,16 +23,16 @@ function onClickNextVideo() {
     counterVideos.value == 0 ? counterVideos.value = props.workout["videoURLS"].length - 1 : counterVideos.value--
 }
 
-const title = computed(() => {
-    return workoutDate.getTime() === today ? "Today's Workout" : workoutDate.getTime() === yesterday ? "Yesterday's Workout" : workoutDate.getTime() === tomorrow ? "Tomorrow's Workout" : props.workout["date"]
-})
+// const title = computed(() => {
+//     return (workoutDate.toLocaleDateString() === today.toLocaleDateString() ? "Today's Workout" : (workoutDate.toLocaleDateString() === yesterday.toLocaleDateString() ? "Yesterday's Workout" : (workoutDate.toLocaleDateString() === tomorrow.toLocaleDateString() ? "Tomorrow's Workout" : props.workout["date"])))
+// })
 
         
 </script>
 
 <template>
     <div class="inner-container">
-        <p class="title">{{ title }}</p>
+        <p class="title">{{ workout.date }}</p>
         <p class="subtitle">Run:</p>
         <p class="value margin-bottom">+ Run {{ workout["distance"] }} at a {{ workout["effort"] }} pace.</p>
         <p class="subtitle">20 Min. AMRAP Strength Circuit:</p>

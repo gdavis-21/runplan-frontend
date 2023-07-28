@@ -4,47 +4,45 @@
     import GoalsComponent from '/src/components/GoalsComponent.vue';
     import UpcomingRacesComponent from '/src/components/UpcomingRacesComponent.vue'
 
-    const yesterday = {
-        "date": "2023-07-26",
-        "distance": "6 miles",
-        "effort": "recovery (4/10)",
-        "strengthCircuit": ["15 Lunge Squats (Each Side)", "15 Bridges", "20 Clamshells (Each Side)", "Wall Sit (1 Min.)"],
-        "mobilityChallenge": ["90/90 Stretch (2 Min.)"],
-        "videoURLS": ["https://www.youtube.com/watch?v=Ne8yvlyiO-s", "https://www.youtube.com/watch?v=_leI4qFfPVw", "https://www.youtube.com/watch?v=tQ6pqITQx_Q", "https://www.youtube.com/watch?v=2EwWIc5nAAo&t=3s"]
-    }
-    const today = {
-        "date": "2023-07-27",
-        "distance": "4 miles",
-        "effort": "easy (5/10)",
-        "strengthCircuit": ["Planks w/ Shoulder Taps (1 Min.)", "Debug Bug w/ Arm/Leg Extension (1 Min)", "Leg Flutters (1 Min.)"],
-        "mobilityChallenge": ["World's Greatest Stretch (2 Min.)"],
-        "videoURLS": ["https://www.youtube.com/watch?v=DZ460QK_gPk", "https://www.youtube.com/watch?v=g_BYB0R-4Ws", "https://www.youtube.com/watch?v=ANVdMDaYRts"]
-    }
-    const tomorrow = {
-        "date": "2023-07-28",
-        "distance": "2 miles",
-        "effort": "hard (8/10)",
-        "strengthCircuit": ["1 Min. Walking Plank (Each Side)", "Debug Bug w/ Arm/Leg Extension (1 Min)", "1 Min. Side Plank (Each Side)"],
-        "mobilityChallenge": ["3 Min. Standing Hip Stretch (Each Side)"],
-        "videoURLS": ["https://www.youtube.com/watch?v=qcHTPmWD4lY", "https://www.youtube.com/watch?v=g_BYB0R-4Ws", "https://www.youtube.com/watch?v=rCxF2nG9vQ0"]
-    }
+    import { BASE_URL } from '/src/main.js'
 
-    const workouts = [
-        yesterday, today, tomorrow
-    ]
-    const goals = [
-        {"name": "Run the Pinhoti 100 in under 31 Hours."},
-    ]
-    const upcomingRaces = [
-        {
-            "date": "2023-11-04",
-            "name": "Pinhoti 100"
-        },
-        {
-            "date": "2024-03-01",
-            "name": "Barkley Marathon"
-        }
-    ]
+    // const yesterday = {
+    //     "date": "2023-07-27",
+    //     "distance": "6 miles",
+    //     "effort": "recovery (4/10)",
+    //     "strengthCircuit": ["15 Lunge Squats (Each Side)", "15 Bridges", "20 Clamshells (Each Side)", "Wall Sit (1 Min.)"],
+    //     "mobilityChallenge": ["90/90 Stretch (2 Min.)"],
+    //     "videoURLS": ["https://www.youtube.com/watch?v=Ne8yvlyiO-s", "https://www.youtube.com/watch?v=_leI4qFfPVw", "https://www.youtube.com/watch?v=tQ6pqITQx_Q", "https://www.youtube.com/watch?v=2EwWIc5nAAo&t=3s"]
+    // }
+    // const today = {
+    //     "date": "2023-07-28",
+    //     "distance": "4 miles",
+    //     "effort": "easy (5/10)",
+    //     "strengthCircuit": ["Planks w/ Shoulder Taps (1 Min.)", "Debug Bug w/ Arm/Leg Extension (1 Min)", "Leg Flutters (1 Min.)"],
+    //     "mobilityChallenge": ["World's Greatest Stretch (2 Min.)"],
+    //     "videoURLS": ["https://www.youtube.com/watch?v=DZ460QK_gPk", "https://www.youtube.com/watch?v=g_BYB0R-4Ws", "https://www.youtube.com/watch?v=ANVdMDaYRts"]
+    // }
+    // const tomorrow = {
+    //     "date": "2023-07-29",
+    //     "distance": "2 miles",
+    //     "effort": "hard (8/10)",
+    //     "strengthCircuit": ["1 Min. Walking Plank (Each Side)", "Debug Bug w/ Arm/Leg Extension (1 Min)", "1 Min. Side Plank (Each Side)"],
+    //     "mobilityChallenge": ["3 Min. Standing Hip Stretch (Each Side)"],
+    //     "videoURLS": ["https://www.youtube.com/watch?v=qcHTPmWD4lY", "https://www.youtube.com/watch?v=g_BYB0R-4Ws", "https://www.youtube.com/watch?v=rCxF2nG9vQ0"]
+    // }
+
+    const userDataResponse = await fetch(`${BASE_URL}` + "/fetchUserData/", {
+        credentials: "include"
+    })
+    const userData = await userDataResponse.json()
+
+    const upcomingRacesResponse = await fetch(`${BASE_URL}` + "/fetchUpcomingRaces/", {
+        credentials: "include"
+    })
+    const upcomingRaces = await upcomingRacesResponse.json()
+
+    const workouts = userData.workouts
+    const goals = userData.goals
 
     const isMenuVisible = ref(0)
     const menuDisplayOption = ref("none")
@@ -71,20 +69,13 @@
     const workoutIndex = ref(0)
 
     function onClickPreviousWorkout() {
-        workoutIndex.value == 0 ? workoutIndex.value = workouts.length - 1 : workoutIndex.value--
+        if (workoutIndex.value - 1 > 0) {
+            --workoutIndex.value
+        }
     }
     function onClickNextWorkout() {
-        workoutIndex.value < workouts.length - 1 ? workoutIndex.value++ : workoutIndex.value = 0
-    }
-    function getCorrectIndex(index) {
-        if (index < 0) {
-            return workouts.length - 1
-        }
-        else if (index > workouts.length - 1) {
-            return 0
-        }
-        else {
-            return index;
+        if (workoutIndex.value + 1 < workouts.length) {
+            workoutIndex.value
         }
     }
 </script>
@@ -107,13 +98,13 @@
                     arrow_back_ios
                 </span>
                 <div class="yesterday-workout">
-                    <WorkoutComponent :workout="workouts[getCorrectIndex(workoutIndex)]"/>
+                    <WorkoutComponent :workout="workouts[workoutIndex]"/>
                 </div>
                 <div class="today-workout">
-                    <WorkoutComponent :workout="workouts[getCorrectIndex(workoutIndex) + 1]"/>
+                    <WorkoutComponent :workout="workouts[workoutIndex + 1]"/>
                 </div>
                 <div class="tomorrow-workout">
-                    <WorkoutComponent :workout="workouts[getCorrectIndex(workoutIndex) + 2]"/>
+                    <WorkoutComponent :workout="workouts[workoutIndex + 2]"/>
                 </div>
                 <span class="material-symbols-outlined next-workout-button" @click="onClickNextWorkout">
                     arrow_forward_ios
@@ -196,7 +187,7 @@
         position:absolute;
         top:0%;
         left:100%;
-        height:150vh;
+        height:100vh;
         width:100vw;
         z-index: 5;
     }
@@ -387,15 +378,25 @@
 
     /* Phone Width Screen */
     @media screen and (max-width: 640px) {
+        .logo {
+        margin-top:3%;
+        margin-bottom:1%;
+        padding-left:3.5%;
+    }
+    .hamburger-icon {
+        margin-top:3%;
+        margin-bottom:1%;
+        padding-right:3.5%;
+    }
         .workouts {
-            margin-top: 0;
+            margin-top: 10%;
         }
         .yesterday-workout {
             display: none;
         }
         .today-workout {
             position: relative;
-            left: -10%;
+            left: -9.5%;
             width: 80%;
         }
         .tomorrow-workout {
@@ -403,7 +404,7 @@
         }
         .esc {
             flex-direction: column;
-            margin-top: 50px;
+            margin-top: 40px;
             gap: 40px;
         }
         .goals {
@@ -422,7 +423,7 @@
             left:81%;
         }
         .menu {
-            height: 220vh;
+            height: 250vh;
         }
     }
 </style>

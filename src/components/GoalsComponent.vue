@@ -2,17 +2,17 @@
 import { ref } from "vue"
 const props = defineProps({goals: Object})
 const goals = ref([...props.goals])
-// const goalEmojis = ["🎯", "🏁", "💯", "🏆", "💪", "✨", "🌟", "🔥"]
+import { BASE_URL } from '/src/main.js'
 
 async function onUserAddGoalEvent(e) {
     goals.value.push({"name": "New Goal", "isComplete": false})
-    const response = await fetch("http://127.0.0.1:8000/fetchCSRFToken/")
+    const response = await fetch(`${BASE_URL}` + "/fetchCSRFToken/")
     const csrfToken = document.cookie.split("=")[1]
     try {
         const headers = {
             "X-Csrftoken": csrfToken,
         }
-        const response = await fetch("http://127.0.0.1:8000/addUserGoal/", {
+        const response = await fetch(`${BASE_URL}` + "/addUserGoal/", {
             method: "POST",
             headers: headers,
             credentials: "include"
@@ -30,7 +30,7 @@ async function onInputGoalEvent(e, index) {
                 return goal.name !== ""
         })
     }
-    const response = await fetch("http://127.0.0.1:8000/fetchCSRFToken/")
+    const response = await fetch(`${BASE_URL}` + "/fetchCSRFToken/")
     const csrfToken = document.cookie.split("=")[1]
     try {
         const formData = new FormData()
@@ -38,7 +38,7 @@ async function onInputGoalEvent(e, index) {
         const headers = {
             "X-Csrftoken": csrfToken,
         }
-        const response = await fetch("http://127.0.0.1:8000/updateUserGoals/", {
+        const response = await fetch(`${BASE_URL}` + "/updateUserGoals/", {
             method: "POST",
             body: formData,
             headers: headers,
