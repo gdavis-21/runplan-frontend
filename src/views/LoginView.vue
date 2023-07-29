@@ -11,6 +11,7 @@ async function submitUserLogin(e) {
     const csrfTokenResponse = await fetch(`${BASE_URL}` + "/fetchCSRFToken/", {
     })
     let csrfToken = document.querySelector("input").value
+    console.log(csrfToken);
     try {
         const formData = new FormData()
         formData.append("username", username.value)
@@ -24,7 +25,6 @@ async function submitUserLogin(e) {
             method: "POST",
             body: formData,
             headers: headers,
-            credentials: "include",
         })
         // If success, redirect user to the dashboard.
         if (response.ok) {
