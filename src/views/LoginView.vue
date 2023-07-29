@@ -22,7 +22,7 @@ async function submitUserLogin(e) {
         formData.append("password", password.value)
 
         const headers = {
-            "X-Csrftoken": csrfToken,
+            "X-CSRFToken": csrfToken,
         }
 
         const response = await fetch(`${BASE_URL}` + "/authenticateUser/", {
