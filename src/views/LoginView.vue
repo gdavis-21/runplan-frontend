@@ -22,14 +22,14 @@ async function submitUserLogin(e) {
         formData.append("username", username.value)
         formData.append("password", password.value)
 
-        // const headers = {
-        //     "X-CSRFToken": csrfToken,
-        // }
+        const headers = {
+            "X-CSRFToken": csrfToken,
+        }
 
         const response = await fetch(`${BASE_URL}` + "/authenticateUser/", {
             method: "POST",
             body: formData,
-            // headers: headers,
+            headers: headers,
             credentials: "include"
         })
         // If success, redirect user to the dashboard.
