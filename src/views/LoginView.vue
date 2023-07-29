@@ -11,7 +11,6 @@ async function submitUserLogin(e) {
     const csrfTokenResponse = await fetch(`${BASE_URL}` + "/fetchCSRFToken/", {
     })
     const csrfToken = document.cookie.split("=")[1]
-    console.log(csrfToken)
 
     try {
         const formData = new FormData()
