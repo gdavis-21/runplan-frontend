@@ -15,7 +15,7 @@ async function submitUserLogin(e) {
     const parser = new DOMParser()
     const dom = parser.parseFromString(text, "text/html")
     const csrfToken = dom.querySelector("input").value
-    document.cookie = `csrftoken=${csrfToken}; path=/; SameSite=None`;
+    document.cookie = `csrftoken=${csrfToken}; path=/; SameSite=None; Secure=True`;
 
     try {
         const formData = new FormData()
