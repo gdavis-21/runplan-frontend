@@ -1,29 +1,37 @@
-# runplan
+# Runplan
 
-This template should help get you started developing with Vue 3 in Vite.
+## Project Build Requirements
+- Vue.js
+- Vite
 
-## Recommended IDE Setup
+## Project Deployment Requiremnts
+- Vue.js
+- Vite
+- Serve (Used to serve the 'built' project)
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## What is Runplan?
+- Runplan is a web-based application aimed at streamling training plans.
 
-## Customize configuration
+## Who is Runplan for?
+- Runplan is targeted at local running clubs that provide training plans.
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+## Why use Runplan?
+- Runplan makes it fun for coaches and players to see their weekly training, make goals, and learn about upcoming races (and if a team member is competing in a race).
 
-## Project Setup
+## What A Typical Training Plan Might Look Like:
 
-```sh
-npm install
-```
+![An example running plan](https://github.com/gdavis-21/runplan-frontend/blob/7156b5af3032a522e6a97baa08f0bfcc4d8e89bd/example-running-plan.png)
 
-### Compile and Hot-Reload for Development
+## Application Breakdown
 
-```sh
-npm run dev
-```
+## Login Page
 
-### Compile and Minify for Production
+Here, a user signs in with credentials provided by a coach.
 
-```sh
-npm run build
-```
+## Dashboard Page
+
+Here, a player can see yesterday's, today's, and tomorrow's workout. They can also scroll through previous and upcoming workouts, add, modify, or remove goals, and see any upcoming races.
+
+## Admin Page
+
+Here, a coach can add the weekly training plans for a user, add upcoming races, and if they desire, update a user's goals.
