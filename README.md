@@ -31,11 +31,14 @@ Here, a user signs in with credentials provided by a coach.
 
 Here, a player can see yesterday's, today's, and tomorrow's workout. They can also scroll through previous and upcoming workouts, add, modify, or remove goals, and see any upcoming races.
 
-![dashboard page large screens](https://github.com/gdavis-21/runplan-frontend/blob/c0a9a35c699f4468e52d806fd601f35ddb266805/large-screen.png)
+Large Screen
+![dashboard page large screens](large-screen.png)
 
-![dashboard page medium screens](https://github.com/gdavis-21/runplan-frontend/blob/c0a9a35c699f4468e52d806fd601f35ddb266805/medium-screen.png)
+Medium Screen
+![dashboard page medium screens](medium-screen.png)
 
-![dashboard page small screens](https://github.com/gdavis-21/runplan-frontend/blob/c0a9a35c699f4468e52d806fd601f35ddb266805/small-screen.png)
+Small Screen
+![dashboard page small screens](small-screen.png)
 
 ## Admin Page
 
