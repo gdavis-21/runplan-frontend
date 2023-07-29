@@ -25,7 +25,7 @@ Runplan is split into two components: a front-end component (using Vue.js and Vi
 
 Here, a user signs in with credentials provided by a coach.
 
-![login page](https://github.com/gdavis-21/runplan-frontend/blob/c0a9a35c699f4468e52d806fd601f35ddb266805/login-screen.png)
+![login page](login-screen.png)
 
 ## Dashboard Page
 
@@ -44,4 +44,4 @@ Small Screen
 
 Here, a coach can add the weekly training plans for a user, add upcoming races, and if they desire, update a user's goals.
 
-![admin page](https://github.com/gdavis-21/runplan-frontend/blob/c0a9a35c699f4468e52d806fd601f35ddb266805/admin-screen.png)
+![admin page](admin-screen.png)
