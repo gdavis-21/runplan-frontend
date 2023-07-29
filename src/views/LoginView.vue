@@ -34,8 +34,8 @@ async function submitUserLogin(e) {
 
         }
     }
-    catch {
-
+    catch(e) {
+        console.log(e)
     }
 }
 
