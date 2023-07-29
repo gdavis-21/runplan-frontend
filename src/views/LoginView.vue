@@ -15,7 +15,6 @@ async function submitUserLogin(e) {
     const parser = new DOMParser()
     const dom = parser.parseFromString(text, "text/html")
     const csrfToken = dom.querySelector("input").value
-    console.log(csrfToken)
 
     try {
         const formData = new FormData()
@@ -30,6 +29,7 @@ async function submitUserLogin(e) {
             method: "POST",
             body: formData,
             headers: headers,
+            credentials: "include"
         })
         // If success, redirect user to the dashboard.
         if (response.ok) {
