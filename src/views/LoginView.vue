@@ -9,10 +9,8 @@ const password = ref("")
 async function submitUserLogin(e) {
     e.preventDefault()
     const csrfTokenResponse = await fetch(`${BASE_URL}` + "/fetchCSRFToken/", {
-        credentials: "include"
-})
-    console.log("-----------------------",document.cookie)
-    const csrfToken = document.cookie.split("=")[1]
+    })
+    csrfToken = document.querySelector("input").value
     try {
         const formData = new FormData()
         formData.append("username", username.value)
