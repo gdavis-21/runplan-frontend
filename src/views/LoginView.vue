@@ -30,7 +30,6 @@ async function submitUserLogin(e) {
             method: "POST",
             body: formData,
             headers: headers,
-            credentials: "include"
         })
         // If success, redirect user to the dashboard.
         if (response.ok) {
