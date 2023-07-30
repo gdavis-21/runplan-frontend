@@ -9,6 +9,7 @@ const password = ref("")
 async function submitUserLogin(e) {
     e.preventDefault()
     const csrfTokenResponse = await fetch(`${BASE_URL}` + "/fetchCSRFToken/", {
+        credentials: "include"
     })
     const csrfToken = await csrfTokenResponse.text()
     console.log(document.cookie)
@@ -30,6 +31,7 @@ async function submitUserLogin(e) {
             method: "POST",
             body: formData,
             headers: headers,
+            credentials: "include"
         })
         // If success, redirect user to the dashboard.
         if (response.ok) {
