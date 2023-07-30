@@ -10,7 +10,7 @@ async function submitUserLogin(e) {
     e.preventDefault()
     const csrfTokenResponse = await fetch(`${BASE_URL}` + "/fetchCSRFToken/", {
     })
-    const text = csrfTokenResponse.text()
+    const text = await csrfTokenResponse.text()
     const parser = new DOMParser()
     const dom = parser.parseFromString(text, "text/html")
     const csrfToken = dom.querySelector("input").value
