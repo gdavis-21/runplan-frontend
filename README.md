@@ -2,7 +2,7 @@
 
 Runplan is a single-page web application written in Vue.js, Javascript, and Python.
 
-(The page can be visited at https://run-plan-frontend-972a41e31320.herokuapp.com/ and images can be see down below)
+(The page can be visited at https://run-plan-frontend-972a41e31320.herokuapp.com/ and the username is 'admin' and the password is 'password12345')
 
 ## Purpose:
 - Streamline training plans for local running clubs.
