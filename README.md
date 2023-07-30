@@ -33,7 +33,7 @@ Depending on the size of the device, the dashboard's layout will adjust.
 
 ### Coach Page
 
-The aforementioned page lets a coach 
+The aforementioned page lets a coach add workouts, upcoming races, and modify goals.
 
 ## Images
 
