@@ -12,7 +12,7 @@ async function submitUserLogin(e) {
         credentials: "include"
     })
     const csrfToken = await csrfTokenResponse.text()
-    console.log(document.cookie)
+    document.cookie
     // const parser = new DOMParser()
     // const dom = parser.parseFromString(text, "text/html")
     // const csrfToken = dom.querySelector("input").value
