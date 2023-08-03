@@ -187,11 +187,11 @@ async function submitUserLogin(e) {
         width:100%;
     }
     .remember-me-checkbox {
-        width:20px;
-        height:20px;
+        width:17.5px;
+        height:17.5px;
     }
     .remember-me-label {
-        font-size: 1.25rem;
+        font-size: 1rem;
         padding-left:10px;
     }
     .sign-in-button {
