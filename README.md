@@ -1,47 +1,53 @@
 # Runplan
 
-(Heads Up: The purpose of the project was to experiment with vue, django, and website deployment)
+Runplan is a single-page web application written in Vue.js, Javascript, and Python.
 
-## What is Runplan?
-- Runplan is a web-based application aimed at streamling training plans.
-- Runplan is targeted at local running clubs that provide training plans.
-- Runplan makes it fun for coaches and players to see their weekly training, make goals, and learn about upcoming races (and if a team member is competing in a race).
+(The page can be visited at https://run-plan-frontend-972a41e31320.herokuapp.com/ and the username is 'admin' and the password is 'password12345')
 
-## Technologies Used
+## Purpose:
+- Streamline training plans for local running clubs.
+
+- Runplan makes it one-stop shop for coaches and players to see their weekly training, make goals, and learn about upcoming races.
+
+## Front-End
 - Vue.js
 - Vite
-- Serve (Used to serve the 'built' project)
+
+## Back-End
 - Django
-- PostgreSQL Server
-- Responsive Design
-
-Runplan is a single-page-application.
-
-Runplan is split into two components: a front-end component (using Vue.js and Vite) that client side renders all CSS and HTML and a back-end component (using Django) that serves user data and handles authentication. Data on the back-end is configured to be stored on a Postgres server.
+- Postgres
 
 ## Application Breakdown
 
-## Login Page
+The application consist of three different pages: **Login Page**, **Dashboard Page**, and a **Coach's Page**
 
-Here, a user signs in with credentials provided by a coach.
+### Login Page
 
-![login page](login-screen.png)
+The aforementioned page verify a user's identity and associates a session id with it.
 
-## Dashboard Page
+### Dashboard Page
 
-Here, a player can see yesterday's, today's, and tomorrow's workout. They can also scroll through previous and upcoming workouts, add, modify, or remove goals, and see any upcoming races.
+The aforementioned page lets a user scroll through previous and upcoming workouts, add, modify, and remove goals, and also see any upcoming races.
 
-Large Screen
-![dashboard page large screens](large-screen.png)
+Depending on the size of the device, the dashboard's layout will adjust.
 
-Medium Screen
-![dashboard page medium screens](medium-screen.png)
+### Coach Page
 
-Small Screen
-![dashboard page small screens](small-screen.png)
+The aforementioned page lets a coach add workouts, upcoming races, and modify goals.
 
-## Admin Page
+## Images
 
-Here, a coach can add the weekly training plans for a user, add upcoming races, and if they desire, update a user's goals.
+*Login Screen*
+![dashboard page large screens](./src/assets/login-screen.png)
 
-![admin page](admin-screen.png)
+*Large Dashboard Screen*
+![dashboard page large screens](./src/assets/large-screen.png)
+
+*Medium Dashboard Screen*
+![dashboard page medium screens](./src/assets/medium-screen.png)
+
+*Small Dashboard Screen*
+![dashboard page small screens](./src/assets/small-screen.png)
+
+*Coach's Page*
+![coach page](./src/assets/admin-screen.png)
